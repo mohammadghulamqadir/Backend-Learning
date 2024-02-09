@@ -8,7 +8,7 @@ cloudinary.config({
     api_secret: process.env.CLOUDINARY_API_SECRET
 });
 
-const uploaodCloudinar = async (localFilePath) => {
+const uploadOnCloudinary = async (localFilePath) => {
     try {
         if (!localFilePath) return "File is not found"
         //upload the file on the cloudinary 
@@ -27,4 +27,4 @@ const uploaodCloudinar = async (localFilePath) => {
 //     { public_id: "olympic_flag" },
 //     function (error, result) { console.log(result); });
 
-export { }
+export { uploadOnCloudinary }

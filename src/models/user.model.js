@@ -105,4 +105,4 @@ UserSchema.methods.generateRefreshToken = function () {
 }
 //both are JWT Tokens
 
-export const User = model("User", UserSchema)
+export const User = model("User", UserSchema)//it is directly connected with mongo dataBase
