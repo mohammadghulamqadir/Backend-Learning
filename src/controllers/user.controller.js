@@ -3,6 +3,8 @@ import { ApiError } from "../utils/ApiError.js";
 import { User } from "../models/user.model.js"
 import { uploadOnCloudinary } from "../utils/cloudinary.js"
 
+import { ApiResponse } from "../utils/ApiResponse.js";
+
 const registerUser = asyncHandler(async (req, res) => {
     /*
      * get user detail from frontend
@@ -46,12 +48,24 @@ const registerUser = asyncHandler(async (req, res) => {
         throw new ApiError(400, "Avatar is required")
     }
 
-    User.create({
+    const user = await User.create({
         fullname,
         avatar: avatar.url,
-        // coverImage: 
+        coverImage: coverImage?.url || "",
+        email,
+        password,
+        username: username.toLowerCase()
     })
 
+    const CreatedUser = await User.findById(user._id).select(
+        "-password -refreshToken"
+    )
+
+    if (!CreatedUser) {
+        throw new ApiError(500, "Something went Wring while registering the User")
+    }
+
+    return res.status(201).json(new ApiResponse(200, CreatedUser, "User registered Successfully"))
 })
 
 export { registerUser, }
