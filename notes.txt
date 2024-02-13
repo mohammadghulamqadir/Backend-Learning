@@ -1,1 +1,6 @@
 Multer to upload the file in backend. 
+
+
+Access Token is short live. because we give the access of period of time where user stay for specific time for need to access
+
+refresh token is long lived. we saved in db and user. user validate by access token and but no need to authenticate and just hit an endpoint then access the login. if the access and refresh token are the same then we can get authenticate.
